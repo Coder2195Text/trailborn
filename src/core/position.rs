@@ -1,11 +1,18 @@
 use std::ops::{Add, Neg};
 
-use fixed::{FixedI32, types::extra::U3};
+use fixed::{traits::Fixed, types::I29F3};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Position {
-  pub x: FixedI32<U3>,
-  pub y: FixedI32<U3>,
+  pub x: I29F3,
+  pub y: I29F3,
+}
+
+impl Position {
+  pub const ZERO: Self = Position {
+    x: I29F3::ZERO,
+    y: I29F3::ZERO,
+  };
 }
 
 impl Add for Position {
