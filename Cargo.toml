@@ -8,4 +8,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 fixed = "1.29.0"
-godot = "0.2.4"
+godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }

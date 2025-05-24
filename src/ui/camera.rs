@@ -1,4 +1,4 @@
-use godot::prelude::*;
+use godot::{classes::ICamera2D, prelude::*};
 
 #[derive(GodotClass)]
 #[class(init, base=Camera2D)]
