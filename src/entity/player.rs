@@ -7,12 +7,16 @@ use godot::{
   prelude::*,
 };
 
-use crate::core::{constants::TILE_SIZE, position::Position};
+use crate::{
+  core::{constants::TILE_SIZE, position::Position},
+  ui::camera::GameCamera,
+};
 
 use super::traits::Entity;
 
 const PLAYER_ACCEL: f32 = 1000.0;
-const SKINS: [&str; 24] = [
+
+pub const SKINS: [&str; 24] = [
   "res://assets/textures/player/F_01.png",
   "res://assets/textures/player/F_02.png",
   "res://assets/textures/player/F_03.png",
@@ -39,7 +43,7 @@ const SKINS: [&str; 24] = [
   "res://assets/textures/player/M_12.png",
 ];
 
-const SKIN_COUNT: i32 = SKINS.len() as i32;
+pub const SKIN_COUNT: i32 = SKINS.len() as i32;
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
@@ -129,12 +133,12 @@ impl ICharacterBody2D for Player {
       velocity.x += if left { -accel } else { accel };
     }
 
+    let mut camera = base.get_node_as::<GameCamera>("Camera");
+
+    camera.bind_mut().set_target_position(velocity * 0.5);
+
     base.set_velocity(velocity);
     base.move_and_slide();
-
-    let final_position = base.get_position();
-
-    let delta = (final_position - initial_position).length();
 
     if up ^ down && !(left || right) {
       sprite.set_animation(if up { "up" } else { "down" });
@@ -143,6 +147,10 @@ impl ICharacterBody2D for Player {
     if left ^ right {
       sprite.set_animation(if left { "left" } else { "right" });
     }
+
+    let final_position = base.get_position();
+
+    let delta = (final_position - initial_position).length();
 
     if (up != down || left != right) && delta > 0.01 {
       sprite.set_speed_scale(if run { 2.0 } else { 1.0 });

@@ -9,3 +9,4 @@ crate-type = ["cdylib"]
 [dependencies]
 fixed = "1.29.0"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+papaya = "0.2.1"
