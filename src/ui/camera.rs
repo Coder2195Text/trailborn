@@ -3,6 +3,8 @@ use godot::{
   prelude::*,
 };
 
+use crate::core::constants::SCREEN_SIZE;
+
 #[derive(GodotClass)]
 #[class(base=Camera2D)]
 pub struct GameCamera {
@@ -33,18 +35,19 @@ impl ICamera2D for GameCamera {
   }
 
   fn process(&mut self, delta: f64) {
-    let base = self.base_mut();
+    let mut base = self.base_mut();
 
     if let Some((size, ratio)) = base
       .get_viewport()
       .map(|v| v.get_visible_rect().size)
       .map(|s| (s, s.x / s.y))
     {
-      if ratio > 16.0 / 9.0 {
-        // wider screen
+      let zoom = if ratio > 16.0 / 9.0 {
+        size.x / SCREEN_SIZE.x as f32
       } else {
-        // taller screen
-      }
+        size.y / SCREEN_SIZE.y as f32
+      };
+      base.set_zoom(Vector2::new(zoom, zoom));
     }
   }
 }

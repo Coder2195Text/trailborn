@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Trailborn"
-run/main_scene="uid://3vd4xhrxn002"
+run/main_scene="uid://bsc6l73waqk3p"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="trailborn"
 config/features=PackedStringArray("4.4", "Forward Plus")
@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/mode=2
 window/stretch/aspect="ignore"
 
 [editor_plugins]
@@ -77,6 +78,6 @@ prev_skin={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0, 0.564706, 0, 1)
+environment/defaults/default_clear_color=Color(0.24341, 0.538635, 0.384518, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

@@ -131,7 +131,7 @@ motion_mode = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
-scale = Vector2(2.75, 2.75)
+scale = Vector2(2.6, 2.6)
 sprite_frames = SubResource("SpriteFrames_qly61")
 animation = &"up"
 

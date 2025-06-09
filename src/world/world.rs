@@ -1,11 +1,19 @@
-use godot::{classes::class_macros::registry::signal, prelude::*};
+use std::collections::HashMap;
+
+use godot::{classes::Engine, prelude::*};
+
+use super::chunk::Chunk;
 
 #[derive(GodotClass)]
-#[class(init, base=Object)]
+#[class(init, base=Node)]
 pub struct World {
+  world_id: GString,
   seed: i32,
-  base: Base<Object>,
+  base: Base<Node>,
 }
+
+#[godot_api]
+impl INode for World {}
 
 #[godot_api]
 impl World {
@@ -30,4 +38,23 @@ impl World {
 
   #[signal]
   fn place_loaded();
+
+  #[func]
+  pub fn get_world_id(&self) -> GString {
+    self.world_id.clone()
+  }
+
+  #[func]
+  pub fn set_world_id(&mut self, world_id: GString) {
+    self.world_id = world_id;
+  }
+}
+
+impl World {
+  pub fn singleton() -> Gd<Self> {
+    Engine::singleton()
+      .get_singleton("World")
+      .unwrap()
+      .cast::<World>()
+  }
 }

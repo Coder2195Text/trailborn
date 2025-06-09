@@ -1,15 +1,17 @@
-use fixed::traits::LossyInto;
+use fixed::{traits::LossyInto, types::I32F32};
 use godot::{
   classes::{
     AnimatedSprite2D, AtlasTexture, CharacterBody2D, ICharacterBody2D, Input, ResourceLoader,
     Texture2D,
   },
   prelude::*,
+  task::TaskHandle,
 };
 
 use crate::{
   core::{constants::TILE_SIZE, position::Position},
   ui::camera::GameCamera,
+  world::chunk::Chunk,
 };
 
 use super::traits::Entity;
@@ -47,7 +49,7 @@ pub const SKIN_COUNT: i32 = SKINS.len() as i32;
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
-struct Player {
+pub struct Player {
   base: Base<CharacterBody2D>,
   offset: Vector2i,
   #[export(range=(0.0,SKIN_COUNT as f64 - 1.0))]
@@ -237,11 +239,23 @@ impl Player {
   fn set_offset(&mut self, offset: Vector2i) {
     self.offset = offset;
   }
+
+  #[func]
+  fn get_position_string(&self) -> GString {
+    let position = self.get_position();
+    format!("({}, {})", position.x, position.y).into()
+  }
 }
 
 impl Entity for Player {
   fn get_position(&self) -> Position {
-    let pos = Position::from(self.offset);
+    let mut pos = Position::from(self.offset);
+
+    let base = self.base();
+    let base_pos = base.get_position() / TILE_SIZE;
+
+    pos.x += I32F32::from_num(base_pos.x);
+    pos.y += I32F32::from_num(base_pos.y);
 
     pos
   }
