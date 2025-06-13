@@ -1,6 +1,9 @@
-use std::ops::{Add, Neg};
+use std::ops::{Add, AddAssign, Div, Mul, Neg, Rem, Sub};
 
-use fixed::types::I32F32;
+use fixed::{
+  traits::{FromFixed, ToFixed},
+  types::{I32F32, extra::LeEqU64},
+};
 use godot::builtin::{Vector2, Vector2i};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -27,6 +30,17 @@ impl Add for Position {
   }
 }
 
+impl Sub for Position {
+  type Output = Position;
+
+  fn sub(self, other: Position) -> Position {
+    Position {
+      x: self.x - other.x,
+      y: self.y - other.y,
+    }
+  }
+}
+
 impl Neg for Position {
   type Output = Position;
 
@@ -38,8 +52,12 @@ impl Neg for Position {
   }
 }
 
-impl From<(i32, i32)> for Position {
-  fn from((x, y): (i32, i32)) -> Self {
+impl<X, Y> From<(X, Y)> for Position
+where
+  X: ToFixed,
+  Y: ToFixed,
+{
+  fn from((x, y): (X, Y)) -> Self {
     Position {
       x: I32F32::from_num(x),
       y: I32F32::from_num(y),
@@ -47,18 +65,10 @@ impl From<(i32, i32)> for Position {
   }
 }
 
-impl From<(f32, f32)> for Position {
-  fn from((x, y): (f32, f32)) -> Self {
-    Position {
-      x: I32F32::from_num(x),
-      y: I32F32::from_num(y),
-    }
-  }
-}
-
-impl From<(I32F32, I32F32)> for Position {
-  fn from((x, y): (I32F32, I32F32)) -> Self {
-    Position { x, y }
+// refuses to work with normal Into trait
+impl Position {
+  fn into<X: FromFixed, Y: FromFixed>(self) -> (X, Y) {
+    (self.x.to_num::<X>(), self.y.to_num::<Y>())
   }
 }
 
@@ -70,18 +80,71 @@ impl From<Position> for (I32F32, I32F32) {
 
 impl From<Vector2> for Position {
   fn from(vec: Vector2) -> Self {
-    Position {
-      x: I32F32::from_num(vec.x),
-      y: I32F32::from_num(vec.y),
-    }
+    return Self::from((vec.x, vec.y));
   }
 }
 
 impl From<Vector2i> for Position {
   fn from(vec: Vector2i) -> Self {
+    Self::from((vec.x, vec.y))
+  }
+}
+
+impl<T> Div<T> for Position
+where
+  T: ToFixed + Copy,
+{
+  type Output = Position;
+
+  fn div(self, scalar: T) -> Position {
     Position {
-      x: I32F32::from_num(vec.x),
-      y: I32F32::from_num(vec.y),
+      x: self.x / I32F32::from_num(scalar),
+      y: self.y / I32F32::from_num(scalar),
     }
+  }
+}
+
+impl<T> Mul<T> for Position
+where
+  T: ToFixed + Copy,
+{
+  type Output = Position;
+
+  fn mul(self, scalar: T) -> Position {
+    Position {
+      x: self.x * I32F32::from_num(scalar),
+      y: self.y * I32F32::from_num(scalar),
+    }
+  }
+}
+
+impl<T> Rem<T> for Position
+where
+  T: ToFixed + Copy,
+{
+  type Output = Position;
+
+  fn rem(self, scalar: T) -> Position {
+    Position {
+      x: self.x % I32F32::from_num(scalar),
+      y: self.y % I32F32::from_num(scalar),
+    }
+  }
+}
+
+impl Add<Vector2> for Position {
+  type Output = Position;
+
+  fn add(self, other: Vector2) -> Position {
+    Position {
+      x: self.x + I32F32::from_num(other.x),
+      y: self.y + I32F32::from_num(other.y),
+    }
+  }
+}
+
+impl Into<Vector2> for Position {
+  fn into(self) -> Vector2 {
+    Vector2::new(self.x.to_num(), self.y.to_num())
   }
 }

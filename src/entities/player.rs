@@ -196,7 +196,7 @@ impl Player {
   pub fn offset_changed(offset: Vector2i);
 
   #[func]
-  fn change_skin(&mut self, skin: Gd<Texture2D>) {
+  pub fn change_skin(&mut self, skin: Gd<Texture2D>) {
     let base = self.base_mut();
 
     let mut sprite = base.get_node_as::<AnimatedSprite2D>("Sprite");
@@ -231,17 +231,17 @@ impl Player {
   }
 
   #[func]
-  fn get_offset(&mut self) -> Vector2i {
+  pub fn get_offset(&mut self) -> Vector2i {
     self.offset
   }
 
   #[func]
-  fn set_offset(&mut self, offset: Vector2i) {
+  pub fn set_offset(&mut self, offset: Vector2i) {
     self.offset = offset;
   }
 
   #[func]
-  fn get_position_string(&self) -> GString {
+  pub fn get_position_string(&self) -> GString {
     let position = self.get_position();
     format!("({}, {})", position.x, position.y).into()
   }
