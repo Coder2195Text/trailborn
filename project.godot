@@ -74,10 +74,12 @@ prev_skin={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="solid"
+2d_physics/layer_3="ground"
+2d_physics/layer_4="mouse"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.24341, 0.538635, 0.384518, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

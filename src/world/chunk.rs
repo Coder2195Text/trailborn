@@ -1,4 +1,4 @@
-use fixed::{traits::Fixed, types::I32F32};
+use fixed::types::I32F32;
 use godot::{
   classes::{FileAccess, ResourceLoader, file_access::ModeFlags},
   prelude::*,
@@ -10,7 +10,7 @@ use crate::{
     position::Position,
   },
   entities::player::Player,
-  world::world::World,
+  world::{objects::ground_tile::GroundTile, world::World},
 };
 
 #[derive(GodotClass)]
@@ -24,13 +24,15 @@ pub struct Chunk {
 #[godot_api]
 impl INode2D for Chunk {
   fn ready(&mut self) {
-    let base = self.base_mut();
+    let mut base = self.base_mut();
     let mut player = base
       .get_parent()
       .map(|parent| parent.get_node_as::<Player>("Player"))
       .unwrap();
 
     let offset = player.bind_mut().get_offset();
+
+    base.set_y_sort_enabled(true);
 
     drop(base);
 
@@ -90,23 +92,22 @@ impl Chunk {
 
     let mut resource_loader = ResourceLoader::singleton();
 
-    // let grass = resource_loader
-    //   .load("res://nodes/objects/grass.tscn")
-    //   .unwrap()
-    //   .cast::<PackedScene>();
+    let ground_tile = resource_loader
+      .load("res://nodes/objects/ground_tile.tscn")
+      .unwrap()
+      .cast::<PackedScene>();
 
     if let Some(file) = file {
       // load file data
     } else {
-      for _ in 0..100 {
-        // let mut grass_instance = grass.instantiate_as::<Sprite2D>();
+      for x in 0..CHUNK_SIZE {
+        for y in 0..CHUNK_SIZE {
+          let mut tile = ground_tile.instantiate_as::<GroundTile>();
 
-        // grass_instance.set_position(Vector2::new(
-        //   rand::random::<f32>() * CHUNK_LENGTH,
-        //   rand::random::<f32>() * CHUNK_LENGTH,
-        // ));
+          obj.add_child(&tile);
 
-        // obj.add_child(&grass_instance);
+          tile.set_position(Vector2::new(x as f32, y as f32) * TILE_SIZE);
+        }
       }
       godot_print!("Chunk file not found at position: {:?}", chunk_pos);
     }

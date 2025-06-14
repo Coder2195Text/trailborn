@@ -1,17 +1,143 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsc6l73waqk3p"]
+[gd_scene load_steps=16 format=3 uid="uid://bsc6l73waqk3p"]
 
 [ext_resource type="PackedScene" uid="uid://ddu5kjlsyhagu" path="res://nodes/entities/player.tscn" id="1_bywrr"]
+[ext_resource type="Texture2D" uid="uid://b5hq1io8nqr7r" path="res://icon.svg" id="2_1vcfs"]
+[ext_resource type="Texture2D" uid="uid://dcmt6cwjer0o6" path="res://assets/textures/plants/Broken_tree3.png" id="3_dvdhf"]
+[ext_resource type="Texture2D" uid="uid://csm0o1m8ljoxh" path="res://assets/textures/plants/Broken_tree6.png" id="4_637j1"]
+[ext_resource type="Texture2D" uid="uid://d2k1ubm7mjx4x" path="res://assets/textures/plants/Autumn_tree1.png" id="5_0atvk"]
+[ext_resource type="Texture2D" uid="uid://c0qsj4f1sef3u" path="res://assets/textures/plants/Autumn_tree2.png" id="6_ol0k1"]
+[ext_resource type="Texture2D" uid="uid://cxstkxle0w6el" path="res://assets/textures/plants/Autumn_tree3.png" id="7_722wd"]
+[ext_resource type="Texture2D" uid="uid://bhbs1qssrvfka" path="res://assets/textures/plants/Burned_tree1.png" id="8_vtvvh"]
+[ext_resource type="Texture2D" uid="uid://d0cflep3pivy5" path="res://assets/textures/plants/Burned_tree2.png" id="9_cjja1"]
+[ext_resource type="Texture2D" uid="uid://dot2gqukslgdu" path="res://assets/textures/plants/Broken_tree4.png" id="10_lasc2"]
+[ext_resource type="Texture2D" uid="uid://berugteoki2xk" path="res://assets/textures/plants/Christmas_tree3.png" id="11_r4f00"]
+[ext_resource type="Texture2D" uid="uid://3tuqb32ugb8w" path="res://assets/textures/plants/Christmas_tree1.png" id="12_op127"]
 
 [sub_resource type="GDScript" id="GDScript_4jydo"]
 script/source = "extends Player
 
 func _ready() -> void:
-	
 	get_parent().add_child.call_deferred(Chunk.load(Vector2i(0,0)));
 "
 
+[sub_resource type="Gradient" id="Gradient_1vcfs"]
+offsets = PackedFloat32Array(0, 0.19375, 0.625, 0.96875)
+colors = PackedColorArray(0, 0, 0, 0, 0.29, 0.29, 0.29, 0.478431, 1, 1, 1, 1, 0.972481, 0.972481, 0.972481, 0.979784)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4p83r"]
+gradient = SubResource("Gradient_1vcfs")
+fill_to = Vector2(0.923077, 0.952991)
+
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_bywrr")]
-position = Vector2(101, 51)
+position = Vector2(5, -4)
 script = SubResource("GDScript_4jydo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1000
+offset_left = -966.0
+offset_top = -576.0
+offset_right = 1526.0
+offset_bottom = 680.0
+color = Color(0.010827, 0.59043, 0.258993, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Chunk" type="Chunk" parent="."]
+chunk_pos = Vector2i(0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Chunk"]
+position = Vector2(327, 252.25)
+scale = Vector2(10.1875, 7.88281)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_4p83r")
+
+[node name="Icon" type="Sprite2D" parent="Chunk"]
+position = Vector2(5.5, 81.5)
+scale = Vector2(0.257812, 0.289062)
+texture = ExtResource("2_1vcfs")
+
+[node name="Icon2" type="Sprite2D" parent="Chunk"]
+position = Vector2(129, 82)
+scale = Vector2(0.257812, 0.289062)
+texture = ExtResource("2_1vcfs")
+
+[node name="Icon3" type="Sprite2D" parent="Chunk"]
+position = Vector2(367, 248)
+scale = Vector2(0.257812, 0.289062)
+texture = ExtResource("2_1vcfs")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.474089, 0.586422, 1, 1)
+blend_mode = 2
+
+[node name="Chunk2" type="Chunk" parent="."]
+chunk_pos = Vector2i(1, 0)
+position = Vector2(644, 3)
+
+[node name="BrokenTree3" type="Sprite2D" parent="Chunk2"]
+position = Vector2(311, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("3_dvdhf")
+
+[node name="BrokenTree6" type="Sprite2D" parent="Chunk2"]
+position = Vector2(249, 294)
+scale = Vector2(2, 2)
+texture = ExtResource("4_637j1")
+
+[node name="AutumnTree1" type="Sprite2D" parent="Chunk2"]
+position = Vector2(126, 303)
+scale = Vector2(2, 2)
+texture = ExtResource("5_0atvk")
+offset = Vector2(-2, -29)
+
+[node name="AutumnTree2" type="Sprite2D" parent="Chunk2"]
+position = Vector2(123, 447)
+scale = Vector2(2, 2)
+texture = ExtResource("6_ol0k1")
+offset = Vector2(-1, -28)
+
+[node name="AutumnTree3" type="Sprite2D" parent="Chunk2"]
+position = Vector2(333, 189)
+scale = Vector2(2, 2)
+texture = ExtResource("7_722wd")
+
+[node name="BurnedTree1" type="Sprite2D" parent="Chunk2"]
+position = Vector2(417, 380)
+scale = Vector2(2, 2)
+texture = ExtResource("8_vtvvh")
+offset = Vector2(4, -24)
+
+[node name="BurnedTree2" type="Sprite2D" parent="Chunk2"]
+position = Vector2(260, 410)
+scale = Vector2(2, 2)
+texture = ExtResource("9_cjja1")
+offset = Vector2(1, -20)
+
+[node name="BrokenTree4" type="Sprite2D" parent="Chunk2"]
+position = Vector2(357, 372)
+scale = Vector2(2, 2)
+texture = ExtResource("10_lasc2")
+
+[node name="BrokenTree5" type="Sprite2D" parent="Chunk2"]
+position = Vector2(191, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("10_lasc2")
+
+[node name="ChristmasTree3" type="Sprite2D" parent="Chunk2"]
+position = Vector2(127, 291)
+scale = Vector2(2, 2)
+texture = ExtResource("11_r4f00")
+offset = Vector2(-1, -6)
+
+[node name="ChristmasTree1" type="Sprite2D" parent="Chunk2"]
+position = Vector2(128, 273)
+scale = Vector2(2, 2)
+texture = ExtResource("12_op127")
+offset = Vector2(0, -29)
+
+[connection signal="offset_changed" from="Player" to="Chunk" method="offset_position"]
