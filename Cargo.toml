@@ -11,3 +11,5 @@ fixed = "1.29.0"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
 noise = "0.9.0"
 rand = "0.9.1"
+strum = { version = "0.27.1", features = ["derive"] }
+strum_macros = "0.27.1"

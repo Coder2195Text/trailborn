@@ -1,0 +1,331 @@
+[gd_scene load_steps=37 format=3 uid="uid://dwxkf5jgsbhj"]
+
+[ext_resource type="Texture2D" uid="uid://bhbs1qssrvfka" path="res://assets/textures/plants/barren_tree_large.png" id="1_6lr2w"]
+[ext_resource type="Texture2D" uid="uid://d0cflep3pivy5" path="res://assets/textures/plants/barren_tree_medium.png" id="2_3l2ai"]
+[ext_resource type="Texture2D" uid="uid://bmh2fs0v201a3" path="res://assets/textures/plants/barren_tree_small.png" id="3_p2nq4"]
+[ext_resource type="Texture2D" uid="uid://3tuqb32ugb8w" path="res://assets/textures/plants/bushwood_tree_large.png" id="4_amymk"]
+[ext_resource type="Texture2D" uid="uid://coric286vxeno" path="res://assets/textures/plants/bushwood_tree_medium.png" id="5_nbtrr"]
+[ext_resource type="Texture2D" uid="uid://cl4n4ekbfdeis" path="res://assets/textures/plants/bushwood_tree_small.png" id="6_f3wpg"]
+[ext_resource type="Texture2D" uid="uid://cd8dhce1qix83" path="res://assets/textures/plants/cherry_tree_large.png" id="7_pnwea"]
+[ext_resource type="Texture2D" uid="uid://chpgpnkk2iduv" path="res://assets/textures/plants/cherry_tree_medium.png" id="8_74gih"]
+[ext_resource type="Texture2D" uid="uid://di4kcbfwjo5rc" path="res://assets/textures/plants/cherry_tree_small.png" id="9_5escp"]
+[ext_resource type="Texture2D" uid="uid://tmw66pak66nc" path="res://assets/textures/plants/coconut_tree_large.png" id="10_bqgny"]
+[ext_resource type="Texture2D" uid="uid://bmdr783er5qp2" path="res://assets/textures/plants/coconut_tree_medium.png" id="11_duc45"]
+[ext_resource type="Texture2D" uid="uid://v720wwue32gc" path="res://assets/textures/plants/coconut_tree_small.png" id="12_f7sp8"]
+[ext_resource type="Texture2D" uid="uid://dk8b4p570nni1" path="res://assets/textures/plants/fan_palm_tree_large.png" id="13_n63qu"]
+[ext_resource type="Texture2D" uid="uid://dh0mgt0c8ns08" path="res://assets/textures/plants/fan_palm_tree_medium.png" id="14_o1vsn"]
+[ext_resource type="Texture2D" uid="uid://dopbccou8op3c" path="res://assets/textures/plants/fan_palm_tree_small.png" id="15_bl0cb"]
+[ext_resource type="Texture2D" uid="uid://haxwmtbg3box" path="res://assets/textures/plants/frostgreen_tree_large.png" id="16_hj6wg"]
+[ext_resource type="Texture2D" uid="uid://c4sinwfbp70qw" path="res://assets/textures/plants/frostgreen_tree_medium.png" id="17_8xdct"]
+[ext_resource type="Texture2D" uid="uid://c4ats8v44o26" path="res://assets/textures/plants/frostgreen_tree_small.png" id="18_y8dij"]
+[ext_resource type="Texture2D" uid="uid://cpyc74qh2kpr7" path="res://assets/textures/plants/fruit_tree_large.png" id="19_1xw3b"]
+[ext_resource type="Texture2D" uid="uid://mmdehs8q0y8f" path="res://assets/textures/plants/fruit_tree_medium.png" id="20_qaddu"]
+[ext_resource type="Texture2D" uid="uid://bdag5b4ele27o" path="res://assets/textures/plants/fruit_tree_small.png" id="21_eyjig"]
+[ext_resource type="Texture2D" uid="uid://vgo3yvj6pdtb" path="res://assets/textures/plants/greenleaf_tree_large.png" id="22_jpd8q"]
+[ext_resource type="Texture2D" uid="uid://00b48i6bb3fb" path="res://assets/textures/plants/greenleaf_tree_medium.png" id="23_a2p04"]
+[ext_resource type="Texture2D" uid="uid://t42b518a136o" path="res://assets/textures/plants/greenleaf_tree_small.png" id="24_8picv"]
+[ext_resource type="Texture2D" uid="uid://d2k1ubm7mjx4x" path="res://assets/textures/plants/maple_tree_large.png" id="25_vmfbi"]
+[ext_resource type="Texture2D" uid="uid://c0qsj4f1sef3u" path="res://assets/textures/plants/maple_tree_medium.png" id="26_h441j"]
+[ext_resource type="Texture2D" uid="uid://cxstkxle0w6el" path="res://assets/textures/plants/maple_tree_small.png" id="27_ycr23"]
+[ext_resource type="Texture2D" uid="uid://cmmn6mg23oeyc" path="res://assets/textures/plants/moss_tree_large.png" id="28_f1sp2"]
+[ext_resource type="Texture2D" uid="uid://c0al1fqnk7e8i" path="res://assets/textures/plants/moss_tree_medium.png" id="29_se7la"]
+[ext_resource type="Texture2D" uid="uid://yf207s25hc7i" path="res://assets/textures/plants/moss_tree_small.png" id="30_q80pd"]
+[ext_resource type="Texture2D" uid="uid://8m1g2tagi87i" path="res://assets/textures/plants/snow_tree_large.png" id="31_jhlnu"]
+[ext_resource type="Texture2D" uid="uid://dx7hgpces1oc2" path="res://assets/textures/plants/snow_tree_medium.png" id="32_ias87"]
+[ext_resource type="Texture2D" uid="uid://coq4jfevl646m" path="res://assets/textures/plants/snow_tree_small.png" id="33_6bfne"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kpdo3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6lr2w")
+}],
+"loop": true,
+"name": &"barren_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3l2ai")
+}],
+"loop": true,
+"name": &"barren_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_p2nq4")
+}],
+"loop": true,
+"name": &"barren_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_amymk")
+}],
+"loop": true,
+"name": &"bushwood_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nbtrr")
+}],
+"loop": true,
+"name": &"bushwood_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_f3wpg")
+}],
+"loop": true,
+"name": &"bushwood_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pnwea")
+}],
+"loop": true,
+"name": &"cherry_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_74gih")
+}],
+"loop": true,
+"name": &"cherry_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_5escp")
+}],
+"loop": true,
+"name": &"cherry_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_bqgny")
+}],
+"loop": true,
+"name": &"coconut_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_duc45")
+}],
+"loop": true,
+"name": &"coconut_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_f7sp8")
+}],
+"loop": true,
+"name": &"coconut_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_n63qu")
+}],
+"loop": true,
+"name": &"fan_palm_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_o1vsn")
+}],
+"loop": true,
+"name": &"fan_palm_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_bl0cb")
+}],
+"loop": true,
+"name": &"fan_palm_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_hj6wg")
+}],
+"loop": true,
+"name": &"frostgreen_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_8xdct")
+}],
+"loop": true,
+"name": &"frostgreen_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_y8dij")
+}],
+"loop": true,
+"name": &"frostgreen_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_1xw3b")
+}],
+"loop": true,
+"name": &"fruit_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_qaddu")
+}],
+"loop": true,
+"name": &"fruit_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_eyjig")
+}],
+"loop": true,
+"name": &"fruit_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_jpd8q")
+}],
+"loop": true,
+"name": &"greenleaf_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_a2p04")
+}],
+"loop": true,
+"name": &"greenleaf_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_8picv")
+}],
+"loop": true,
+"name": &"greenleaf_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_vmfbi")
+}],
+"loop": true,
+"name": &"maple_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_h441j")
+}],
+"loop": true,
+"name": &"maple_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_ycr23")
+}],
+"loop": true,
+"name": &"maple_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_f1sp2")
+}],
+"loop": true,
+"name": &"moss_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_se7la")
+}],
+"loop": true,
+"name": &"moss_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_q80pd")
+}],
+"loop": true,
+"name": &"moss_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_jhlnu")
+}],
+"loop": true,
+"name": &"snow_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_ias87")
+}],
+"loop": true,
+"name": &"snow_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_6bfne")
+}],
+"loop": true,
+"name": &"snow_small",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6lr2w"]
+radius = 14.0
+height = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnwea"]
+radius = 79.0063
+
+[node name="Tree" type="TreeObject"]
+self_modulate = Color(0.93, 0, 0.651, 0)
+collision_layer = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kpdo3")
+animation = &"snow_large"
+offset = Vector2(3, -25)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6lr2w")
+
+[node name="Reveal" type="PlayerReveal" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reveal"]
+position = Vector2(0, -74)
+shape = SubResource("CircleShape2D_pnwea")
+one_way_collision_margin = 0.0

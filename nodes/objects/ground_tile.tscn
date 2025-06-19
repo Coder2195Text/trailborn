@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdunwk4x4gnd5"]
+[gd_scene load_steps=5 format=3 uid="uid://bdunwk4x4gnd5"]
 
-[ext_resource type="Texture2D" uid="uid://b5hq1io8nqr7r" path="res://icon.svg" id="1_xnxfx"]
+[ext_resource type="Texture2D" uid="uid://basl4ntqul747" path="res://assets/textures/tiles/grass.png" id="1_xnxfx"]
+[ext_resource type="Texture2D" uid="uid://berugteoki2xk" path="res://assets/textures/plants/bush.png" id="2_o6wjh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdhcr"]
 size = Vector2(32, 32)
@@ -14,16 +15,25 @@ animations = [{
 "loop": true,
 "name": &"grass",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o6wjh")
+}],
+"loop": true,
+"name": &"stone",
+"speed": 5.0
 }]
 
 [node name="GroundTile" type="GroundTile"]
+tile = "stone"
 z_index = -500
+collision_layer = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fdhcr")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-4.76837e-07, 1.19209e-07)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fdhcr")
-animation = &"grass"
+animation = &"stone"

@@ -76,6 +76,7 @@ prev_skin={
 2d_physics/layer_2="solid"
 2d_physics/layer_3="ground"
 2d_physics/layer_4="mouse"
+2d_physics/layer_5="player_reveal"
 
 [rendering]
 
