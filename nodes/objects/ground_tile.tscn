@@ -13,7 +13,7 @@ animations = [{
 "texture": ExtResource("1_xnxfx")
 }],
 "loop": true,
-"name": &"grass",
+"name": &"s",
 "speed": 5.0
 }, {
 "frames": [{
@@ -36,4 +36,4 @@ shape = SubResource("RectangleShape2D_fdhcr")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fdhcr")
-animation = &"stone"
+animation = &"s"

@@ -1,4 +1,4 @@
-use godot::classes::{AnimatedSprite2D, CapsuleShape2D, Shape2D};
+use godot::classes::{AnimatedSprite2D, CollisionShape2D};
 use godot::global::PropertyHint;
 use godot::meta::PropertyHintInfo;
 use godot::{
@@ -9,6 +9,8 @@ use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum::{EnumIter, EnumString, IntoStaticStr};
 
+use crate::core::collision::Collider;
+use crate::effects::player_reveal::PlayerReveal;
 use crate::impl_EnumVar;
 
 #[derive(
@@ -44,11 +46,6 @@ pub enum TreeType {
 }
 
 impl_EnumVar!( for TreeSize, TreeType );
-
-struct TreeData {
-  offset: Vector2,
-  shape: Shape2D,
-}
 
 #[derive(GodotClass)]
 #[class(base=StaticBody2D,init)]
@@ -90,33 +87,75 @@ impl TreeObject {
   fn update_tree(&mut self) {
     let tree_type = self.tree_type;
     let tree_size = self.size;
-    let base = self.base_mut();
 
     let tree_type: &str = tree_type.into();
     let tree_size: &str = tree_size.into();
+
+    let reveal_shapes = self.get_reveal_shapes();
+    let collision_shapes = self.get_collision_shapes();
+    let tree_offset = self.get_tree_offset();
+
+    let mut base = self.base_mut();
 
     let animation_name = format!("{}_{}", tree_type, tree_size);
 
     if let Some(mut sprite) = base.try_get_node_as::<AnimatedSprite2D>("Sprite") {
       sprite.set_animation(GString::from(animation_name).arg());
+      sprite.set_offset(tree_offset);
+    }
+
+    base.get_tree().map(|mut tree| {
+      let reveals = tree.get_nodes_in_group("reveal");
+      let solids = tree.get_nodes_in_group("solids");
+
+      for mut node in reveals.iter_shared() {
+        node.remove_from_group("reveal");
+        node.queue_free();
+      }
+
+      for mut node in solids.iter_shared() {
+        node.remove_from_group("solids");
+        node.queue_free();
+      }
+    });
+
+    if let Some(mut reveal) = base.try_get_node_as::<PlayerReveal>("Reveal") {
+      for mut reveal_shape in reveal_shapes {
+        reveal_shape.add_to_group("reveal");
+        reveal.add_child(&reveal_shape);
+      }
+    }
+
+    for mut collison_shape in collision_shapes {
+      collison_shape.add_to_group("solids");
+      base.add_child(&collison_shape);
     }
   }
 
-  // fn get_tree_details(&mut self) {
+  #[func]
+  fn get_tree_offset(&self) -> Vector2 {
+    match (self.size, self.tree_type) {
+      _ => Vector2::ZERO,
+    }
+  }
 
-  //   let tree_type = self.tree_type;
-  //   let tree_size = self.size;
+  #[func]
+  fn get_reveal_shapes(&self) -> Vec<Gd<CollisionShape2D>> {
+    match (self.size, self.tree_type) {
+      // insert multiple reveal shapes above if needed, otherwise default to one individual shape below
+      _ => vec![match (self.size, self.tree_type) {
+        _ => Collider::new().circle(100.0).done(),
+      }],
+    }
+  }
 
-  //   match (tree_type, tree_size) {
-  //     (TreeType::Barren, TreeSize::Large) => TreeData {
-  //       offset: Vector2::new(0.0, -64.0),
-  //       shape: CapsuleShape2D::new_gd().set_height(),
-  //     },
-  //     _ => TreeData {
-  //       offset: Vector2::new(0.0, -32.0),
-  //       shape: Shape2D::default(),
-  //     },
-  //   };
-
-  // }
+  #[func]
+  fn get_collision_shapes(&self) -> Vec<Gd<CollisionShape2D>> {
+    match (self.size, self.tree_type) {
+      // insert multiple collision shapes above if needed, otherwise default to one individual shape below
+      _ => vec![match (self.size, self.tree_type) {
+        _ => Collider::new().capsule(60.0, 14.0).deg(90.0).done(),
+      }],
+    }
+  }
 }
