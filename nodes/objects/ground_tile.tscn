@@ -13,7 +13,7 @@ animations = [{
 "texture": ExtResource("1_xnxfx")
 }],
 "loop": true,
-"name": &"s",
+"name": &"grass",
 "speed": 5.0
 }, {
 "frames": [{
@@ -26,14 +26,15 @@ animations = [{
 }]
 
 [node name="GroundTile" type="GroundTile"]
-tile = "stone"
 z_index = -500
 collision_layer = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_fdhcr")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fdhcr")
-animation = &"s"
+animation = &"grass"

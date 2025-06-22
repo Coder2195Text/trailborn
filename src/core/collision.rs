@@ -13,6 +13,11 @@ impl Collider {
     }
   }
 
+  pub fn none() -> Gd<CollisionShape2D> {
+    godot_warn!("You are using an empty collider. Please implement a collider.");
+    CollisionShape2D::new_alloc()
+  }
+
   pub fn at(mut self, position: Vector2) -> Self {
     self.inner.set_position(position);
     self

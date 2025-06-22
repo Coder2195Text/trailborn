@@ -7,7 +7,9 @@
 script/source = "extends Player
 
 func _ready() -> void:
-	get_parent().add_child.call_deferred(Chunk.load(Vector2i(0,0)));
+  for x in range(-2,2):
+    for y in range(-2,2):
+      get_parent().add_child.call_deferred(Chunk.load(Vector2i(x,y)));
 "
 
 [sub_resource type="Gradient" id="Gradient_1vcfs"]
@@ -29,62 +31,55 @@ script = SubResource("GDScript_4jydo")
 color = Color(0, 0, 0, 1)
 
 [node name="Chunk" type="Chunk" parent="."]
-chunk_pos = Vector2i(0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="Chunk"]
-position = Vector2(667, 262)
+position = Vector2(1315, -54)
 scale = Vector2(20.8125, 8.1875)
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_4p83r")
 
 [node name="Tree" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "fan_palm"
-position = Vector2(58, -226)
+size = "small"
+tree_type = "snow"
+position = Vector2(88, 32)
 
 [node name="Tree2" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "maple"
-position = Vector2(99, -474)
+size = "medium"
+tree_type = "snow"
+position = Vector2(18, 200)
 
 [node name="Tree3" parent="Chunk" instance=ExtResource("8_dnwa4")]
-size = "medium"
-position = Vector2(258, -454)
+tree_type = "snow"
+position = Vector2(208, -100)
 
 [node name="Tree4" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "fan_palm"
-position = Vector2(107, -612)
+size = "small"
+tree_type = "barren"
+position = Vector2(196, 180)
 
 [node name="Tree5" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "fan_palm"
-position = Vector2(212, -594)
+size = "medium"
+tree_type = "barren"
+position = Vector2(398, 66)
 
 [node name="Tree6" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "fan_palm"
-position = Vector2(-80, -293)
+tree_type = "barren"
+position = Vector2(259, 56)
 
 [node name="Tree7" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "maple"
-position = Vector2(157, -600)
+size = "small"
+tree_type = "bushwood"
+position = Vector2(333, 237)
 
 [node name="Tree8" parent="Chunk" instance=ExtResource("8_dnwa4")]
-tree_type = "maple"
-position = Vector2(173, -279)
+size = "medium"
+tree_type = "bushwood"
+position = Vector2(567, -1)
 
 [node name="Tree9" parent="Chunk" instance=ExtResource("8_dnwa4")]
-size = "medium"
-position = Vector2(20, -608)
-
-[node name="Tree10" parent="Chunk" instance=ExtResource("8_dnwa4")]
-size = "medium"
-position = Vector2(453, -315)
-
-[node name="Tree11" parent="Chunk" instance=ExtResource("8_dnwa4")]
-size = "medium"
-position = Vector2(57, -376)
-
-[node name="Tree12" parent="Chunk" instance=ExtResource("8_dnwa4")]
-size = "medium"
-position = Vector2(284, -220)
+tree_type = "bushwood"
+position = Vector2(479, 225)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 blend_mode = 2
@@ -93,4 +88,11 @@ blend_mode = 2
 chunk_pos = Vector2i(1, 0)
 position = Vector2(644, 3)
 
-[connection signal="offset_changed" from="Player" to="Chunk" method="offset_position"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 8.0
+
+[connection signal="timeout" from="Timer" to="Chunk/Tree" method="set_tree_size" binds= ["medium"]]
+[connection signal="timeout" from="Timer2" to="Chunk/Tree" method="set_tree_size" binds= ["small"]]

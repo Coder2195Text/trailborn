@@ -139,6 +139,7 @@ animation = &"up"
 [node name="Collision" type="CollisionShape2D" parent="."]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_merdl")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Camera" type="GameCamera" parent="."]
 position = Vector2(0, -16)

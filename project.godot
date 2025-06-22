@@ -17,6 +17,10 @@ config/custom_user_dir_name="trailborn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+shapes/collision/shape_color=Color(0.720667, 0.6808, 0.92, 0.611765)
+
 [display]
 
 window/size/viewport_width=1600
