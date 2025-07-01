@@ -48,7 +48,7 @@ pub enum TreeType {
 impl_EnumVar!( for TreeSize, TreeType );
 
 #[derive(GodotClass)]
-#[class(base=StaticBody2D,init)]
+#[class(base=StaticBody2D,init,tool)]
 pub struct TreeObject {
   #[export]
   #[var(get,set=set_tree_size)]
